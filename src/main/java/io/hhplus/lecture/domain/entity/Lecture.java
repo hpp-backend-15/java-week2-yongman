@@ -1,9 +1,13 @@
 package io.hhplus.lecture.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "LECTURE")
+@NoArgsConstructor
+@Getter
 public class Lecture {
 
     @Id
@@ -15,5 +19,12 @@ public class Lecture {
     private String title;
 
     @Column
-    private Integer maxStudent;
+    private Integer maxStudent = 30;
+
+    @Column
+    private Integer currentStudent = 0;
+
+    public void plusStudent(){
+        this.currentStudent++;
+    }
 }

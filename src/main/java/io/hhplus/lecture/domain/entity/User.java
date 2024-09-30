@@ -1,9 +1,13 @@
 package io.hhplus.lecture.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "USERS")
+@NoArgsConstructor
+@Getter
 public class User {
 
     @Id
