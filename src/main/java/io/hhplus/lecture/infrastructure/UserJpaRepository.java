@@ -10,8 +10,10 @@ import java.util.Optional;
 @Repository
 public interface UserJpaRepository extends JpaRepository<User, Long> , UserRepository {
 
+    Optional<User> findById(Long userId);
+
     @Override
-    default User findByUser(Long userId){
-        return findById(userId).orElse(null);
+    default Optional<User> findByUser(Long userId){
+        return findById(userId);
     }
 }

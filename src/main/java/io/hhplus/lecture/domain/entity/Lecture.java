@@ -24,6 +24,19 @@ public class Lecture {
     @Column
     private Integer currentStudent = 0;
 
+    public Lecture(Long id, String title,int currentStudent){
+        this.id = id;
+        this.title = title;
+        this.currentStudent = currentStudent;
+    }
+
+    public Lecture(Long id, String title,int maxStudent,int currentStudent){
+        this.id = id;
+        this.title = title;
+        this.maxStudent = maxStudent;
+        this.currentStudent = currentStudent;
+    }
+
     public void plusStudent(){
         this.currentStudent++;
     }

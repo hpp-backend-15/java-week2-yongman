@@ -30,12 +30,10 @@ public class LectureService {
 
     public LectureHistory apply(Long userId, Long lectureId) {
         // 유저 존재 여부
-        User findUser = userRepository.findByUser(userId);
-        if (findUser == null) throw new UserNotFoundException("유저가 존재하지 않습니다.");
+        User findUser = userRepository.findByUser(userId).orElseThrow(() -> new UserNotFoundException("존재하지 않는 사용자입니다."));
 
         // 강의 존재 여부
-        Lecture findLecture = lectureRepository.findLecture(lectureId);
-        if (findLecture == null) throw new LectureNotFoundException("강의가 존재하지 않습니다.");
+        Lecture findLecture = lectureRepository.findLecture(lectureId).orElseThrow(() -> new LectureNotFoundException("강의가 존재하지 않습니다."));
 
         // 수강생 초과 여부
         if (findLecture.getMaxStudent() == findLecture.getCurrentStudent()) throw new MaxStudentException("수강생 초과이므로 신청할 수 없습니다.");
@@ -45,6 +43,7 @@ public class LectureService {
 
         LectureHistory lectureHistory = LectureHistory.applyLectureHistory(findUser,findLecture);
         findLecture.plusStudent();
+
         return lectureHistoryRepository.save(lectureHistory);
     }
 }

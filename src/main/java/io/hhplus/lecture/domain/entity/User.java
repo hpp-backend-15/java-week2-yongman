@@ -1,6 +1,7 @@
 package io.hhplus.lecture.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,8 @@ public class User {
     @Column
     private String name;
 
+    public User(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
 }

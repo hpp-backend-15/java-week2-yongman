@@ -39,6 +39,11 @@ public class LectureHistory {
         this.isApplied = isApplied;
     }
 
+    public LectureHistory(User user, Lecture lecture){
+        this.user = user;
+        this.lecture = lecture;
+    }
+
     public static LectureHistory applyLectureHistory(User user, Lecture lecture){
         return LectureHistory.builder()
                 .user(user)
