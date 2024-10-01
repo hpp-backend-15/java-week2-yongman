@@ -10,5 +10,5 @@ public interface LectureHistoryRepository {
 
     LectureHistory findLectureHistory(User user, Lecture lecture);
 
-    LectureHistory save(LectureHistory lectureHistory);
+    LectureHistory saveLectureHistory(LectureHistory lectureHistory);
 }

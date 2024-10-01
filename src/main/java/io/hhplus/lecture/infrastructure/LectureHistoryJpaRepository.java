@@ -5,10 +5,8 @@ import io.hhplus.lecture.domain.entity.LectureHistory;
 import io.hhplus.lecture.domain.entity.User;
 import io.hhplus.lecture.domain.repository.LectureHistoryRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
 @Repository
 public interface LectureHistoryJpaRepository extends JpaRepository<LectureHistory, Long>, LectureHistoryRepository {
@@ -28,7 +26,7 @@ public interface LectureHistoryJpaRepository extends JpaRepository<LectureHistor
     }
 
     @Override
-    default LectureHistory save(LectureHistory lectureHistory){
+    default LectureHistory saveLectureHistory(LectureHistory lectureHistory){
         return save(lectureHistory);
     }
 }

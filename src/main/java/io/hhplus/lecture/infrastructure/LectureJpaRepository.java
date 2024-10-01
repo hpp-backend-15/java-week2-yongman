@@ -16,4 +16,11 @@ public interface LectureJpaRepository extends JpaRepository<Lecture, Long> , Lec
     default Optional<Lecture> findLecture(Long lectureId){
         return findById(lectureId);
     }
+
+    @Override
+    default Lecture saveLecture(Lecture lecture){
+        return save(lecture);
+    }
+
+
 }

@@ -3,6 +3,7 @@ package io.hhplus.lecture.domain.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "LECTURE")
@@ -24,6 +25,9 @@ public class Lecture {
     @Column
     private Integer currentStudent = 0;
 
+    @Version
+    private Integer version;
+
     public Lecture(Long id, String title,int currentStudent){
         this.id = id;
         this.title = title;
@@ -32,6 +36,12 @@ public class Lecture {
 
     public Lecture(Long id, String title,int maxStudent,int currentStudent){
         this.id = id;
+        this.title = title;
+        this.maxStudent = maxStudent;
+        this.currentStudent = currentStudent;
+    }
+
+    public Lecture(String title, int maxStudent, int currentStudent){
         this.title = title;
         this.maxStudent = maxStudent;
         this.currentStudent = currentStudent;

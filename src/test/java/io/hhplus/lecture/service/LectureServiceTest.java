@@ -140,7 +140,7 @@ public class LectureServiceTest {
         when(userRepository.findByUser(userId)).thenReturn(Optional.of(user));
         when(lectureRepository.findLecture(lectureId)).thenReturn(Optional.of(lecture));
         when(lectureHistoryRepository.isAppliedLecture(user,lecture)).thenReturn(false);
-        when(lectureHistoryRepository.save(any(LectureHistory.class))).thenReturn(lectureHistory);
+        when(lectureHistoryRepository.saveLectureHistory(any(LectureHistory.class))).thenReturn(lectureHistory);
 
         //then
         //강의 신처잉 정상적으로 이루어졌는지 검증
@@ -152,6 +152,6 @@ public class LectureServiceTest {
         verify(userRepository,times(1)).findByUser(userId);
         verify(lectureRepository,times(1)).findLecture(lectureId);
         verify(lectureHistoryRepository,times(1)).isAppliedLecture(user,lecture);
-        verify(lectureHistoryRepository,times(1)).save(any(LectureHistory.class));
+        verify(lectureHistoryRepository,times(1)).saveLectureHistory(any(LectureHistory.class));
     }
 }

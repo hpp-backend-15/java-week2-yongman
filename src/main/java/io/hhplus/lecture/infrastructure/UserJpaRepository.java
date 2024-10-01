@@ -16,4 +16,9 @@ public interface UserJpaRepository extends JpaRepository<User, Long> , UserRepos
     default Optional<User> findByUser(Long userId){
         return findById(userId);
     }
+
+    @Override
+    default User saveUser(User user){
+        return save(user);
+    }
 }

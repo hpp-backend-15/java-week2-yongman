@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface LectureRepository {
 
     Optional<Lecture> findLecture(Long lectureId);
+
+    Lecture saveLecture(Lecture lecture);
 }
