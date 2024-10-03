@@ -146,10 +146,8 @@ public class LectureConcurrencyTest {
             executor.execute(() -> {
                 try {
                     LectureHistory lectureHistory = lectureService.apply(saveUser.getId(), saveLecture.getId());
-                    System.out.println("신청이 완료 되엇는가? : " + lectureHistory.getIsApplied() );
                     successCount.incrementAndGet();
                 }catch (AlreadyAppliedException e){
-                    System.out.println("이미 지원한 경력이 있습니다.");
                     e.printStackTrace();
                     failCount.incrementAndGet();
                 }

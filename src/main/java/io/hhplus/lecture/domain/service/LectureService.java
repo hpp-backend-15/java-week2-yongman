@@ -13,13 +13,10 @@ import io.hhplus.lecture.domain.repository.LectureRepository;
 import io.hhplus.lecture.domain.repository.UserRepository;
 import io.hhplus.lecture.presentation.dto.HistoryResponseDto;
 import io.hhplus.lecture.presentation.dto.LectureDetailResponseDto;
-import lombok.extern.log4j.Log4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
@@ -45,8 +42,6 @@ public class LectureService {
     public LectureHistory apply(Long userId, Long lectureId) {
         try {
             lock.lock();
-            System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ시작지점ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-        System.out.println(" **(1)** 유저아이디 =  " + userId + "    ||||||  강의아이디 =" + lectureId );
         // 유저 존재 여부
         User findUser = userRepository.findByUser(userId).orElseThrow(() -> new UserNotFoundException("존재하지 않는 사용자입니다."));
 
@@ -55,15 +50,12 @@ public class LectureService {
 
         // 수강생 초과 여부
         if (findLecture.getMaxStudent() == findLecture.getCurrentStudent()) throw new MaxStudentException("수강생 초과이므로 신청할 수 없습니다.");
-            System.out.println(" **(2)** 현재까지의 신청된 강의자 수 : " + findLecture.getCurrentStudent());
 
         // 수강 신청 여부
         if (lectureHistoryRepository.isAppliedLecture(findUser, findLecture)) throw new AlreadyAppliedException("이미 신청한 강의입니다.");
 
         LectureHistory lectureHistory = LectureHistory.applyLectureHistory(findUser,findLecture);
         findLecture.plusStudent();
-            System.out.println(" **(3)** plusStudent() 메서드가 반영된 후 신청된 강의자 수 : " + findLecture.getCurrentStudent());
-            System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ끝나는지점ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
         return lectureHistoryRepository.saveLectureHistory(lectureHistory);
 
