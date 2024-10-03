@@ -53,4 +53,5 @@ public class LectureHistory {
                 .isApplied(true)
                 .build();
     }
+
 }

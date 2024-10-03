@@ -7,6 +7,8 @@ import io.hhplus.lecture.domain.repository.LectureHistoryRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface LectureHistoryJpaRepository extends JpaRepository<LectureHistory, Long>, LectureHistoryRepository {
@@ -14,6 +16,9 @@ public interface LectureHistoryJpaRepository extends JpaRepository<LectureHistor
     LectureHistory findByUserAndLecture(User user, Lecture lecture);
 
     boolean existsByUserAndLectureAndIsAppliedTrue(User user, Lecture lecture);
+
+    List<LectureHistory> findByUserAndIsAppliedTrue(User user);
+
 
     @Override
     default Boolean isAppliedLecture(User user, Lecture lecture){
@@ -28,5 +33,10 @@ public interface LectureHistoryJpaRepository extends JpaRepository<LectureHistor
     @Override
     default LectureHistory saveLectureHistory(LectureHistory lectureHistory){
         return save(lectureHistory);
+    }
+
+    @Override
+    default List<LectureHistory> findUserLectures(User user){
+        return findByUserAndIsAppliedTrue(user);
     }
 }
